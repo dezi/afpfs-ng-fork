@@ -1,4 +1,6 @@
 afpfs-ng-fork
 =============
 
-afpfs-ng is an Apple Filing Protocol client that will allow BSD, Linux and Mac OS X systems to access files exported from a Mac OS system with AFP over TCP. Forked from http://sourceforge.net/projects/afpfs-ng.
+afpfs-ng is an Apple Filing Protocol client that will allow BSD, Linux and Mac OS X systems to access files exported from a Mac OS system with AFP over TCP. 
+
+Forked from http://sourceforge.net/projects/afpfs-ng.
