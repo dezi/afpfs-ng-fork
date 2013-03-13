@@ -11327,6 +11327,51 @@ CC="$lt_save_CC"
 
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lncurses':
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for iconv_open in -liconv" >&5
+$as_echo_n "checking for iconv_open in -liconv... " >&6; }
+if ${ac_cv_lib_iconv_iconv_open+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-liconv  $LIBS"
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char iconv_open ();
+int
+main ()
+{
+return iconv_open ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ac_cv_lib_iconv_iconv_open=yes
+else
+  ac_cv_lib_iconv_iconv_open=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_iconv_iconv_open" >&5
+$as_echo "$ac_cv_lib_iconv_iconv_open" >&6; }
+if test "x$ac_cv_lib_iconv_iconv_open" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBICONV 1
+_ACEOF
+
+  LIBS="-liconv $LIBS"
+
+fi
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for main in -lncurses" >&5
 $as_echo_n "checking for main in -lncurses... " >&6; }
 if ${ac_cv_lib_ncurses_main+:} false; then :
@@ -11576,7 +11621,7 @@ $as_echo "#define STDC_HEADERS 1" >>confdefs.h
 
 fi
 
-for ac_header in arpa/inet.h fcntl.h limits.h netdb.h stddef.h stdlib.h string.h strings.h sys/socket.h sys/time.h syslog.h unistd.h utime.h
+for ac_header in arpa/inet.h fcntl.h limits.h netdb.h stddef.h stdlib.h string.h strings.h sys/socket.h sys/time.h syslog.h unistd.h utime.h iconv.h
 do :
   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
 ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
@@ -11589,19 +11634,6 @@ fi
 
 done
 
-for ac_header in iconv.h
-do :
-  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
-ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
-if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
-  cat >>confdefs.h <<_ACEOF
-#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
-_ACEOF
-LIBS="-liconv  $LIBS"
-
-fi
-
-done
 
 # Checks for typedefs, structures, and compiler characteristics.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for an ANSI C-conforming const" >&5

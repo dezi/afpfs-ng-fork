@@ -14,6 +14,7 @@ AC_PROG_LIBTOOL
 
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lncurses':
+AC_CHECK_LIB([iconv], [iconv_open])
 AC_CHECK_LIB([ncurses], [main])
 AC_CHECK_LIB([readline],[readline])
 AC_CHECK_LIB([pthread], [pthread_create])

@@ -42,6 +42,9 @@
 /* Define to 1 if you have the `gmp' library (-lgmp). */
 #undef HAVE_LIBGMP
 
+/* Define to 1 if you have the `iconv' library (-liconv). */
+#undef HAVE_LIBICONV
+
 /* Define to 1 if you have the `ncurses' library (-lncurses). */
 #undef HAVE_LIBNCURSES
 
