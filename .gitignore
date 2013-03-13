@@ -1,0 +1,13 @@
+Makefile
+cmdline/.deps/
+cmdline/Makefile
+config.h
+config.log
+config.status
+docs/Makefile
+fuse/.deps/
+fuse/Makefile
+lib/.deps/
+lib/Makefile
+libtool
+stamp-h1
