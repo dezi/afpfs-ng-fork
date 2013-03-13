@@ -183,6 +183,8 @@ struct start_fuse_thread_arg {
 	int fuse_result;
 	int fuse_errno;
 	int changeuid;
+	int changegid;
+	int allow_other;
 };
 
 static void * start_fuse_thread(void * other) 
@@ -214,7 +216,7 @@ static void * start_fuse_thread(void * other)
 		fuseargc++;
 	}
 	
-	if (arg->changeuid) {
+	if (arg->changeuid || arg->changegid || arg->allow_other) {
 		fuseargv[fuseargc]="-o";
 		fuseargc++;
 		fuseargv[fuseargc]="allow_other";
@@ -482,6 +484,8 @@ static int process_mount(struct fuse_client * c)
 		arg.volume = volume;
 		arg.wait = 1;
 		arg.changeuid=req->changeuid;
+		arg.changegid=req->changegid;
+		arg.allow_other=req->allow_other;
 
 		gettimeofday(&tv,NULL);
 		ts.tv_sec=tv.tv_sec;

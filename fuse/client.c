@@ -58,14 +58,11 @@ static int start_afpfsd(void)
 			/* If we don't have an PATH set, it is probably 
 			   becaue we are being called from mount, 
 			   so go search for it */
-			snprintf(filename, PATH_MAX,
-				"/usr/local/bin/%s",AFPFSD_FILENAME);
+			snprintf(filename,PATH_MAX,"/usr/local/bin/%s",AFPFSD_FILENAME);
 			if (access(filename,X_OK)) {
-				snprintf(filename, "/usr/bin/%s",
-					AFPFSD_FILENAME);
+				snprintf(filename,PATH_MAX,"/usr/bin/%s",AFPFSD_FILENAME);
 				if (access(filename,X_OK)) {
-					printf("Could not find server (%s)\n",
-						filename);
+					printf("Could not find server (%s)\n",filename);
 					return -1;
 				}
 			}
@@ -379,6 +376,7 @@ static int handle_mount_afp(int argc, char * argv[])
 	char * urlstring, * mountpoint;
 	char * volpass = NULL;
 	int readonly=0;
+	int allow_other=0;
 
 	if (argc<2) {
 		mount_afp_usage();
@@ -417,11 +415,18 @@ static int handle_mount_afp(int argc, char * argv[])
 					return -1;
 				}
 				gid=group->gr_gid;
-				changegid=1;
+				if (getegid()!=gid)
+					changegid=1;
 			} else if (strcmp(command,"rw")==0) {
+				/* Don't do anything */
+			} else if (strcmp(command,"dev")==0) {
+				/* Don't do anything */
+			} else if (strcmp(command,"suid")==0) {
 				/* Don't do anything */
 			} else if (strcmp(command,"ro")==0) {
 				readonly=1;
+			} else if (strcmp(command,"allow_other")==0) {
+				allow_other=1;
 			} else {
 				printf("Unknown option %s, skipping\n",command);
 			}
@@ -446,6 +451,8 @@ static int handle_mount_afp(int argc, char * argv[])
 	afp_default_url(&req->url);
 
 	req->changeuid=changeuid;
+	req->changegid=changegid;
+	req->allow_other=allow_other;
 
 	req->volume_options|=DEFAULT_MOUNT_FLAGS;
 	if (readonly) req->volume_options |= VOLUME_EXTRA_FLAGS_READONLY;
