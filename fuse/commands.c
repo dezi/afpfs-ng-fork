@@ -46,6 +46,7 @@ void trigger_exit(void);
 static struct fuse_client * client_base = NULL;
 
 struct afp_volume * global_volume;
+char fuse_options[ 256 ];
 
 static int volopen(struct fuse_client * c, struct afp_volume * volume);
 static int process_command(struct fuse_client * c);
@@ -184,6 +185,8 @@ struct start_fuse_thread_arg {
 	int fuse_errno;
 	int changeuid;
 	int changegid;
+	int change2uid;
+	int change2gid;
 	int allow_other;
 };
 
@@ -217,9 +220,12 @@ static void * start_fuse_thread(void * other)
 	}
 	
 	if (arg->changeuid || arg->changegid || arg->allow_other) {
+		snprintf(fuse_options,256,
+			"allow_other,uid=%d,gid=%d",
+			arg->change2uid,arg->change2gid);
 		fuseargv[fuseargc]="-o";
 		fuseargc++;
-		fuseargv[fuseargc]="allow_other";
+		fuseargv[fuseargc]=fuse_options;
 		fuseargc++;
 	}
 
@@ -485,6 +491,8 @@ static int process_mount(struct fuse_client * c)
 		arg.wait = 1;
 		arg.changeuid=req->changeuid;
 		arg.changegid=req->changegid;
+		arg.change2uid=req->change2uid;
+		arg.change2gid=req->change2gid;
 		arg.allow_other=req->allow_other;
 
 		gettimeofday(&tv,NULL);

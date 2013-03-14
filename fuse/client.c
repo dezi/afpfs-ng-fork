@@ -452,6 +452,8 @@ static int handle_mount_afp(int argc, char * argv[])
 
 	req->changeuid=changeuid;
 	req->changegid=changegid;
+	req->change2uid=uid;
+	req->change2gid=gid;
 	req->allow_other=allow_other;
 
 	req->volume_options|=DEFAULT_MOUNT_FLAGS;

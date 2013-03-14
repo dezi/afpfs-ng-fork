@@ -37,6 +37,8 @@ struct afp_server_mount_request {
 	int changeuid;
 	int changegid;
 	int allow_other;
+	int change2uid;
+	int change2gid;
 };
 
 struct afp_server_status_request {
