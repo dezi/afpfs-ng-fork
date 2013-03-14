@@ -18,5 +18,3 @@ lib/Makefile
 libtool
 stamp-h1
 autom4te.cache
-config.h.in~
-
