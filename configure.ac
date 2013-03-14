@@ -41,7 +41,7 @@ AC_HEADER_TIME
 AC_FUNC_FORK
 AC_FUNC_MALLOC
 AC_FUNC_SELECT_ARGTYPES
-AC_CHECK_FUNCS([bzero gethostbyname gettimeofday inet_ntoa memset select socket strchr strerror strstr strtol])
+AC_CHECK_FUNCS([malloc bzero gethostbyname gettimeofday inet_ntoa memset select socket strchr strerror strstr strtol])
 
 AM_CONDITIONAL(HAVE_LIBGCRYPT, false)
 
