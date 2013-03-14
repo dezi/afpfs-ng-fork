@@ -1,7 +1,7 @@
 *.o
 *.lo
 *.la
-lib/.libs
+.libs
 Makefile
 cmdline/.deps/
 cmdline/Makefile
