@@ -16,6 +16,7 @@ install-data-hook:
 	cp afp_client.1 $(DESTDIR)/$(mandir)/man1
 
 install-exec-hook:
+	rm -f $(DESTDIR)$(bindir)/afpfs
 	rm -f $(DESTDIR)$(bindir)/afp_client
 	$(LN_S) mount_afp $(DESTDIR)$(bindir)/afp_client
-	cp afpfs $(DESTDIR)$(bindir)/afpfs
+	$(LN_S) mount_afp $(DESTDIR)$(bindir)/afpfs
