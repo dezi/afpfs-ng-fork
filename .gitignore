@@ -16,4 +16,3 @@ fuse/afpfsd
 fuse/mount_afp
 lib/Makefile
 stamp-h1
-autom4te.cache
