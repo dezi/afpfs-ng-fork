@@ -278,6 +278,19 @@ int main(int argc, char *argv[]) {
 		log_for_client(NULL, AFPFSD,LOG_NOTICE,
 			"Starting up AFPFS version %s\n",AFPFS_VERSION);
 
+		//
+		// Close all stdio channels. If not closed, automount daemon
+		// will produce a zombi mount process. Patch for collaboration
+		// with autofs package. 
+		//
+
+		if (dofork)
+		{
+			close(0);
+			close(1);
+			close(2);
+		}
+
 		afp_main_loop(command_fd);
 		close_commands(command_fd);
 	}

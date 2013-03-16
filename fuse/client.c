@@ -67,7 +67,7 @@ static int start_afpfsd(void)
 				}
 			}
 		}
-		
+
 		if (execvp(filename,argv)) {
 			if (errno==ENOENT) {
 				/* Try the path of afp_client */
@@ -382,11 +382,24 @@ static int handle_mount_afp(int argc, char * argv[])
 		mount_afp_usage();
 		return -1;
 	}
-	if (strncmp(argv[1],"-o",2)==0) {
-		char * p = argv[2], *q;
+	if ((strncmp(argv[1],"-o",2)==0) || (strncmp(argv[3],"-o",2)==0)) {
+		char * p, *q;
 		char command[256];
 		struct passwd * passwd;
 		struct group * group;
+
+		if (strncmp(argv[1],"-o",2)==0)
+		{
+			p = argv[2];
+			urlstring=argv[3];
+			mountpoint=argv[4];
+		}
+		else
+		{
+			p = argv[4];
+			urlstring=argv[1];
+			mountpoint=argv[2];
+		}
 		
 		do {
 			memset(command,0,256);
@@ -436,9 +449,6 @@ static int handle_mount_afp(int argc, char * argv[])
 			else p=NULL;
 
 		} while (p);
-
-		urlstring=argv[3];
-		mountpoint=argv[4];
 	} else {
 		urlstring=argv[1];
 		mountpoint=argv[2];
@@ -575,7 +585,7 @@ int main(int argc, char *argv[])
 
 	volume.server=NULL;
 
-	if (strstr(argv[0],"mount_afp")) {
+	if (strstr(argv[0],"mount_afp") || strstr(argv[0],"afpfs")) {
 		if (handle_mount_afp(argc,argv)<0)
 		return -1;
 	}
