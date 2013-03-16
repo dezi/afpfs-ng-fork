@@ -15,7 +15,7 @@
 #include <netinet/in.h>
 
 
-#define AFPFS_VERSION "0.8.1"
+#define AFPFS_VERSION "0.8.2"
 
 /* This is the maximum AFP version this library supports */
 #define AFP_MAX_SUPPORTED_VERSION 32
