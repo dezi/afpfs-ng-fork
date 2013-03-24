@@ -2,7 +2,7 @@
 
 # libtool - Provide generalized library-building support services.
 # Generated automatically by config.status (afpfs-ng) 0.8.2
-# Libtool was configured on host xbiandev:
+# Libtool was configured on host dezipi:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 #
 #   Copyright (C) 1996, 1997, 1998, 1999, 2000, 2001, 2003, 2004, 2005,
@@ -75,7 +75,7 @@ build=armv6l-unknown-linux-gnueabihf
 build_os=linux-gnueabihf
 
 # A sed program that does not truncate output.
-SED="/bin/sed"
+SED="/usr/local/bin/sed"
 
 # Sed that helps us avoid accidentally triggering echo(1) options like -n.
 Xsed="$SED -e 1s/^X//"
@@ -96,7 +96,7 @@ NM="/usr/bin/nm -B"
 LN_S="ln -s"
 
 # What is the maximum length of a command?
-max_cmd_len=1572864
+max_cmd_len=805306365
 
 # Object file suffix (normally "o").
 objext=o

@@ -446,6 +446,14 @@ static int fuse_getattr(const char *path, struct stat *stbuf)
 
 	ret=ml_getattr(volume,path,stbuf);
 
+	//
+	// In posix blocks are based on 512. Failing
+	// to do so makes du show wrong sizes.
+	//
+
+    stbuf->st_blksize = 512;
+    stbuf->st_blocks = (stbuf->st_size / stbuf->st_blksize) + 1;
+
 	return ret;
 }
 
